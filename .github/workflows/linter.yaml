@@ -2,37 +2,29 @@ name: Teste de Linter
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   test_code_linter:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout do repositório
-      uses: actions/checkout@v3
-    
-    - name: Configurar Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.13
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
 
-    - name: Instalar uv
-      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: Instalar uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
 
-    - name: Sincronizar venv
-      run: uv sync --dev
+      - name: Sincronizar venv
+        run: uv sync --dev
 
-    - name: Ativar venv
-      run: source .venv/bin/activate
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_SECRET_KEY: "SECRET_KEY"
+          envkey_DEBUG: 1
 
-    - name: Make envfile
-      uses: SpicyPizza/create-envfile@v1
-      with:
-        envkey_SECRET_KEY: "SECRET_KEY"
-        envkey_DEBUG: 1
-
-    - name: Executar Linter
-      run: task lint
+      - name: Executar Linter
+        run: uv run task lint
