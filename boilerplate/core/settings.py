@@ -1,10 +1,11 @@
-from pathlib import Path
 import sys
+from pathlib import Path
+
 from core.env_settings import env_settings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-sys.path.insert(0, (BASE_DIR / 'apps').__str__())
+sys.path.insert(0, str(BASE_DIR / 'apps'))
 
 SECRET_KEY = env_settings.SECRET_KEY
 
@@ -24,9 +25,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-THIRD_PARTY_APPS = [
-    
-]
+THIRD_PARTY_APPS = []
 
 PROJECT_APPS = [
     'accounts',
@@ -122,6 +121,27 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 
 # Debug toolbar

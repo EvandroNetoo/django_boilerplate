@@ -4,6 +4,7 @@ from django.db import models
 
 from accounts.managers import UserManager
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'usuário'
