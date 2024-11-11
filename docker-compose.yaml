@@ -1,0 +1,60 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres:17.0-alpine3.20
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=explica
+
+  pgadmin:
+    image: dpage/pgadmin4:8.11.0
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@user.com
+      - PGADMIN_DEFAULT_PASSWORD=secret
+    depends_on:
+      - db
+      
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports:
+      - "6380:6379"
+    networks:
+      - app_network
+
+  django:
+    container_name: django
+    build:
+      context: . 
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app_network
+
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - .venv/
+
+        - action: rebuild
+          path: ./pyproject.toml
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
