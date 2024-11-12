@@ -6,10 +6,12 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=explica
+      - POSTGRES_DB=boilerplate
+    networks:
+      - app_network
 
   pgadmin:
-    image: dpage/pgadmin4:8.11.0
+    image: dpage/pgadmin4:8.12.0
     ports:
       - 5050:80
     environment:
@@ -17,6 +19,8 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=secret
     depends_on:
       - db
+    networks:
+      - app_network
       
   redis:
     container_name: redis
@@ -27,34 +31,18 @@ services:
       - app_network
 
   django:
-    container_name: django
-    build:
-      context: . 
-    env_file:
-      - .env
+    build: .
+    command: python boilerplate/manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/app
+      - ./boilerplate:/app/boilerplate
     ports:
       - "8000:8000"
-    depends_on:
-      - db
-      - redis
     networks:
       - app_network
 
-    develop:
-      watch:
-        - action: sync
-          path: .
-          target: /app
-          ignore:
-            - .venv/
-
-        - action: rebuild
-          path: ./pyproject.toml
-
+    
 volumes:
   postgres_data:
 
 networks:
-  app_network:
+  app_network:  
