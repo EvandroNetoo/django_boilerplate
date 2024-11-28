@@ -14,7 +14,7 @@ SECRET_KEY = env_settings.SECRET_KEY
 
 DEBUG = env_settings.DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
