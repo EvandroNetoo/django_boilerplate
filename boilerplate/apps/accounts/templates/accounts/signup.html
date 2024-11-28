@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <div class="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+        <div class="bg-blue-500 hidden lg:block"></div>
+        <div class="flex flex-col items-center justify-between p-4">
+            <div class="flex w-full justify-end">
+                <a class="secondary-button " href="{% url 'signin' %}">Já tem uma conta?</a>
+            </div>
+
+            <form class="flex flex-col gap-4 w-full max-w-sm"
+                  hx-post="{% url 'signup' %}"
+                  hx-target="#form"
+                  hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+                <div id="form" class="class flex flex-col gap-4">
+
+                    {% include "components/form.html" with form=form %}
+
+                </div>
+
+                <button class="primary-button" type="submit">Cadastrar</button>
+            </form>
+
+            <div>
+                <p>Todos direitos reservados &#174;</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

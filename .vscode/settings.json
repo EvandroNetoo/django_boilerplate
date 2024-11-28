@@ -1,17 +1,22 @@
 {
   "python.analysis.autoImportCompletions": true,
-  "python.analysis.typeCheckingMode": "standard",
+  "python.analysis.typeCheckingMode": "off",
   "python.analysis.indexing": true,
   "python.analysis.packageIndexDepths": [
     {
       "name": "django",
       "includeAllSymbols": true,
       "depth": 20
+    },
+    {
+      "name": "django_htmx",
+      "includeAllSymbols": true,
+      "depth": 5
     }
   ],
   "python.analysis.extraPaths": [
-    ".venv/lib/python3.13/site-packages"
+    ".venv/lib/python3.13/site-packages",
+    "./boilerplate/apps"
   ],
   "css.lint.unknownAtRules": "ignore",
-  "C_Cpp_Runner.msvcBatchPath": ""
 }

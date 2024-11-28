@@ -27,10 +27,14 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    'widget_tweaks',
+    'tailwind',
+]
 
 PROJECT_APPS = [
     'accounts',
+    'theme',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -80,7 +84,6 @@ ASGI_APPLICATION = 'core.asgi.application'
 DATABASES = {
     'default': dj_database_url.parse(
         env_settings.DATABASE_URL,
-        conn_max_age=600,
     ),
 }
 
@@ -152,3 +155,8 @@ INTERNAL_IPS = [
     '127.0.0.1',
     '0.0.0.0',  # noqa
 ]
+
+
+# Tailwind
+
+TAILWIND_APP_NAME = 'theme'
