@@ -1,3 +1,4 @@
+import platform
 import sys
 from pathlib import Path
 
@@ -160,3 +161,5 @@ INTERNAL_IPS = [
 # Tailwind
 
 TAILWIND_APP_NAME = 'theme'
+if platform.system() == 'Windows':
+    NPM_BIN_PATH = r'c:\nodejs\npm.cmd'
