@@ -14,7 +14,7 @@ SECRET_KEY = env_settings.SECRET_KEY
 
 DEBUG = env_settings.DEBUG
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.16.38.205']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -116,7 +116,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'templates/static']
 
 

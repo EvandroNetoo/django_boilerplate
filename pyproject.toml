@@ -34,7 +34,7 @@ makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
 run = "python manage.py runserver"
 tw_start = "python manage.py tailwind start"
-collectstatic = "python manage.py collectstatic && python manage.py tailwind build && python -m blacknoise.compress static/"
+collectstatic = "python manage.py tailwind build && python manage.py collectstatic --noinput -c && python -m blacknoise.compress staticfiles/"
 
 
 [tool.ruff]

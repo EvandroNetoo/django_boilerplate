@@ -3,7 +3,7 @@
 
 ### Project ###
 
-boilerplate/static/
+boilerplate/staticfiles/
 
 ### Django ###
 *.log
