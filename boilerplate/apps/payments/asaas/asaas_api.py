@@ -108,7 +108,7 @@ class AsaasTasks:
     @classmethod
     async def delete_all_customers(cls) -> Response:
         MAX_LIMIT = 100
-        
+
         has_more = True
         offset = 0
         page = 1
