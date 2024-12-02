@@ -29,4 +29,30 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        const loadMasks = () => {
+            IMask(
+                document.getElementById('id_cpf_cnpj'), {
+                    mask: [{
+                            mask: '000.000.000-00',
+                        }, // CPF
+                        {
+                            mask: '00.000.000/0000-00',
+                        } // CNPJ
+                    ]
+                }
+            );
+            IMask(
+                document.getElementById('id_name'), {
+                    mask: /^[a-zA-Z\s]*$/
+                }
+            );
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMasks);
+
+        document.body.addEventListener('htmx:afterSwap', loadMasks);
+    </script>
+
 {% endblock body %}

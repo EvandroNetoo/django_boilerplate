@@ -12,6 +12,7 @@ class EnvSettings(BaseSettings):
     SECRET_KEY: str
     DEBUG: bool
     DATABASE_URL: str
+    ASAAS_API_KEY: str
 
 
 env_settings = EnvSettings()

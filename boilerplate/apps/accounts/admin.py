@@ -28,11 +28,35 @@ class UserAdmin(auth_admin.UserAdmin):
             },
         ),
         (
+            'Informações pessoais',
+            {
+                'fields': (
+                    'cpf_cnpj',
+                    'name',
+                ),
+            },
+        ),
+        (
+            'Pagamentos',
+            {
+                'fields': ('asaas_customer_id',),
+            },
+        ),
+        (
             'Permissões',
             {
                 'fields': (
                     'is_staff',
                     'is_superuser',
+                ),
+            },
+        ),
+        (
+            'Database',
+            {
+                'fields': (
+                    'active',
+                    'exist_deleted',
                 ),
             },
         ),
@@ -49,9 +73,15 @@ class UserAdmin(auth_admin.UserAdmin):
     )
     add_fieldsets = (
         (
-            'Informações de login',
+            'Informações de importantes',
             {
-                'fields': ('email', 'password1', 'password2'),
+                'fields': (
+                    'email',
+                    'name',
+                    'cpf_cnpj',
+                    'password1',
+                    'password2',
+                ),
             },
         ),
     )

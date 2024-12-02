@@ -10,7 +10,7 @@
             </div>
 
             <form class="flex flex-col gap-4 w-full max-w-sm"
-                  hx-post="{% url 'signin' %}"
+                  hx-post="{% url 'signin' %}?{{ request.GET.urlencode }}"
                   hx-target="#form"
                   hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 

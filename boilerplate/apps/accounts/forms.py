@@ -7,18 +7,33 @@ from accounts.models import User
 class SignupForm(BaseUserCreationForm):
     class Meta:
         model = User
-        fields = ['email']
+        fields = [
+            'email',
+            'name',
+            'cpf_cnpj',
+        ]
 
     def clean_email(self):
-        email = self.cleaned_data['email']
+        email = self.cleaned_data.get('email', '')
         return email.lower()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].widget.attrs['autofocus'] = True
+        self.fields[
+            'cpf_cnpj'
+        ].help_text = 'Precisamos do seu CPF/CNPJ para processar pagamentos de forma segura e atender às exigências legais.'
 
-        for field in self.fields:
-            self.fields[field].required = True
+        placeholders = {
+            'email': 'Digite seu email',
+            'name': 'Digite seu nome',
+            'cpf_cnpj': 'Digite seu CPF/CNPJ',
+            'password1': 'Digite sua senha',
+            'password2': 'Confirme sua senha',
+        }
+        for field_name, field in self.fields.items():
+            field.widget.attrs['placeholder'] = placeholders[field_name]
+            field.required = True
 
 
 class SigninForm(AuthenticationForm):
@@ -28,5 +43,16 @@ class SigninForm(AuthenticationForm):
         )
 
     def clean_username(self):
-        username = self.cleaned_data['username']
+        username = self.cleaned_data.get('username', '')
         return username.lower()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['autofocus'] = True
+
+        placeholders = {
+            'username': 'Digite seu email',
+            'password': 'Digite sua senha',
+        }
+        for field_name, field in self.fields.items():
+            field.widget.attrs['placeholder'] = placeholders[field_name]
