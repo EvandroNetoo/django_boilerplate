@@ -82,6 +82,13 @@ class AsaasCostumer(AsaasBase):
         )
 
     @classmethod
+    async def get(cls, customer_id: str) -> Response:
+        return await cls._send_request(
+            method='GET',
+            extra_endpoint=str(customer_id),
+        )
+
+    @classmethod
     async def list(cls, params: dict[str, str] = None) -> Response:
         return await cls._send_request(
             method='GET',
@@ -101,6 +108,20 @@ class AsaasCostumer(AsaasBase):
         return await cls._send_request(
             method='DELETE',
             extra_endpoint=str(customer_id),
+        )
+
+    @classmethod
+    async def restore(cls, customer_id: str) -> Response:
+        return await cls._send_request(
+            method='POST',
+            extra_endpoint=f'{customer_id}/restore',
+        )
+
+    @classmethod
+    async def notifications(cls, customer_id: str) -> Response:
+        return await cls._send_request(
+            method='GET',
+            extra_endpoint=f'{customer_id}/notifications',
         )
 
 

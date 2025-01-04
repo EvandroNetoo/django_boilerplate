@@ -36,6 +36,8 @@ THIRD_PARTY_APPS = [
 
 PROJECT_APPS = [
     'accounts',
+    'app',
+    'payments',
     'theme',
 ]
 

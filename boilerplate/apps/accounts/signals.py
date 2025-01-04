@@ -9,7 +9,7 @@ from accounts.models import User
 
 
 @receiver(post_save, sender=User)
-async def create_asaas_customer(
+async def create_and_update_asaas_customer(
     sender: Type[User],
     instance: User,
     created: bool,
@@ -29,5 +29,6 @@ async def create_asaas_customer(
         return
 
     response = await AsaasApi.customers.update(
-        instance.asaas_customer_id, customer
+        instance.asaas_customer_id,
+        customer,
     )

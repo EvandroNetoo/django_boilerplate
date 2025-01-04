@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    @apply text-slate-900 text-base leading-6;
+body {
+    @apply text-slate-950
 }
 
 .form-input {

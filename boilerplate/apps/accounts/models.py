@@ -1,5 +1,9 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.core.validators import validate_email
+from django.core.validators import (
+    MinLengthValidator,
+    RegexValidator,
+    validate_email,
+)
 from django.db import models
 from utils.models import Active, TimeStampedModel
 
@@ -23,6 +27,13 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel, Active):
         'nome',
         max_length=150,
         blank=False,
+        validators=[
+            RegexValidator(
+                r'^[a-zA-Z\s]+$',
+                'O nome deve conter apenas letras',
+            ),
+            MinLengthValidator(3, 'O nome deve ter pelo menos 3 caracteres'),
+        ],
     )
 
     cpf_cnpj = models.CharField(
